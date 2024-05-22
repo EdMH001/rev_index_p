@@ -1,5 +1,5 @@
-pip install Flask
-pip install googlesearch-python
+#pip install Flask
+#pip install googlesearch-python
 
 from flask import Flask, request
 
