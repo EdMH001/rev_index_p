@@ -10,7 +10,7 @@ def procesar_dato(dato):
         search_results = list(search(query))
         results = 1 if any(dato in result for result in search_results) else 0
     except Exception as e:
-        print(f'Error al buscar {url}. Error {e}')
+        #print(f'Error al buscar {url}. Error {e}')
         results = 0
         time.sleep(1)
     
