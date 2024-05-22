@@ -1,34 +1,34 @@
+import streamlit as st
 from flask import Flask, request, jsonify
-import time  # Asegúrate de importar cualquier módulo necesario
-from googlesearch import search
 
-app = Flask(__name__)
+# Configuración de Flask
+flask_app = Flask(__name__)
 
+@flask_app.route('/process_data', methods=['POST'])
+def process_data():
+    data = request.json  # Obtener los datos enviados desde Google Sheets
+    processed_data = []  # Procesa tus datos con tu función de Python
+    for item in data:
+        # Procesar los datos aquí y agregar los resultados a processed_data
+        processed_data.append(item * 2)  # Ejemplo de procesamiento
 
-def procesar_dato(dato):
-    # Procesar el dato aquí (este es solo un ejemplo simple)
-    
-    # Checar cada url en Google y registrar los resultados
-    query = f'site:{dato}'
-    try:
-        search_results = list(search(query))
-        results = 1 if any(dato in result for result in search_results) else 0
-    except Exception as e:
-        #print(f'Error al buscar {url}. Error {e}')
-        results = 0
-        time.sleep(1)
-    
-    resultado = results
-    return resultado
+    return jsonify(processed_data)
 
+# Configuración de Streamlit
+def main():
+    st.title('Procesamiento de datos')
 
+    # Obtén los datos ingresados por el usuario
+    data = st.text_area("Ingrese los datos aquí (separados por coma)", height=200)
 
-@app.route('/procesar_dato', methods=['POST'])
-def procesar_dato_route():
-    data = request.get_json()
-    dato = data['dato']
-    resultado = procesar_dato(dato)
-    return jsonify({'resultado': resultado})
+    if st.button("Procesar"):
+        # Llama a la función en Flask para procesar los datos
+        response = flask_app.test_client().post('/process_data', json=data.split(","))
+        processed_data = response.json
 
-if __name__ == '__main__':
-    app.run(debug=True)
+        # Muestra los resultados
+        st.write("Resultados del procesamiento:")
+        st.write(processed_data)
+
+if __name__ == "__main__":
+    main()
