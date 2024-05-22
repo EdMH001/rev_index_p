@@ -1,5 +1,19 @@
-pip install flask
-pip install googlesearch-python
+import subprocess
+
+def instalar_flask():
+    try:
+        # Ejecutar el comando pip install flask
+        subprocess.check_call(['pip', 'install', 'flask'])
+        print("Flask ha sido instalado correctamente.")
+    except subprocess.CalledProcessError as e:
+        print("Ha ocurrido un error durante la instalación de Flask:", e)
+
+# Llamamos a la función para instalar Flask
+instalar_flask()
+
+
+#pip install flask
+#pip install googlesearch-python
 
 from flask import Flask, request
 
