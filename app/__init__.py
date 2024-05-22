@@ -3,7 +3,7 @@ import subprocess
 def instalar_flask():
     try:
         # Ejecutar el comando pip install flask
-        subprocess.check_call(['pip', 'install', 'flask'])
+        subprocess.check_call(['pip', 'install', 'Flask'])
         print("Flask ha sido instalado correctamente.")
     except subprocess.CalledProcessError as e:
         print("Ha ocurrido un error durante la instalación de Flask:", e)
