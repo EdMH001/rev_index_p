@@ -5,7 +5,7 @@ def procesar_dato(dato):
     # Procesar el dato aquí (este es solo un ejemplo simple)
     
     # Checar cada url en Google y registrar los resultados
-    query = f'site:{item}'
+    query = f'site:{dato}'
     try:
         search_results = list(search(query))
         results = 1 if any(url in result for result in search_results) else 0
