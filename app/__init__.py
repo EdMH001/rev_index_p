@@ -1,5 +1,8 @@
 import streamlit as st
 
+import time
+from googlesearch import search
+
 # Definir la función para procesar los datos
 def procesar_dato(dato):
     # Procesar el dato aquí (este es solo un ejemplo simple)
