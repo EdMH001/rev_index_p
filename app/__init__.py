@@ -1,12 +1,11 @@
 import streamlit as st
-
+import urllib.parse
 import time
 from googlesearch import search
-
-# Definir la función para procesar los datos
+# Definir la función de procesamiento de datos
 def procesar_dato(dato):
-    # Procesar el dato aquí (este es solo un ejemplo simple)
-    
+    # Realizar el procesamiento necesario
+    # Por ejemplo, simplemente devolver el dato procesado
     # Checar cada url en Google y registrar los resultados
     query = f'site:{dato}'
     try:
@@ -18,21 +17,29 @@ def procesar_dato(dato):
         time.sleep(1)
     
     resultado = results
+    
     return resultado
 
-# Definir la interfaz de usuario de Streamlit
-def main():
-    st.title('Procesamiento de Datos')
+# Definir la ruta de la aplicación para recibir los datos
+@st.experimental_memo()
+def app():
+    # Obtener el dato de la URL
+    dato = st.experimental_get_query_params().get("dato", "")
+    
+    # Procesar el dato
+    resultado = procesar_dato(dato)
+    
+    # Devolver el resultado
+    return resultado
 
-    # Obtener el dato de entrada del usuario
-    dato = st.text_input('Ingrese el dato:')
+# Ejecutar la aplicación
+if __name__ == "__main__":
+    resultado = app()
+    st.write(resultado)
 
-    # Procesar el dato y mostrar el resultado
-    if st.button('Procesar'):
-        resultado = procesar_dato(dato)
-        st.write('Resultado:', resultado)
 
-if __name__ == '__main__':
-    main()
+
+
+
 
 
