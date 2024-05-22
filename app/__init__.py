@@ -1,38 +1,9 @@
-import subprocess
+import streamlit as st
 
-def instalar_flask():
-    try:
-        # Ejecutar el comando pip install flask
-        subprocess.check_call(['pip', 'install', 'Flask'])
-        print("Flask ha sido instalado correctamente.")
-    except subprocess.CalledProcessError as e:
-        print("Ha ocurrido un error durante la instalación de Flask:", e)
-
-# Llamamos a la función para instalar Flask
-instalar_flask()
-
-
-#pip install flask
-#pip install googlesearch-python
-
-from flask import Flask, request
-
-import time
-from googlesearch import search
-
-app = Flask(__name__)
-
-# Ruta para procesar un dato individual
-@app.route('/procesar_dato', methods=['GET'])
-def procesar_dato():
-    dato = request.args.get('dato')
-    # Aquí llamas a tu función de procesamiento de Python
-    resultado = procesar_dato_en_python(dato)
-    return resultado
-
-# Función de procesamiento en Python
-def procesar_dato_en_python(dato):
-    # Aquí va tu lógica de procesamient
+# Definir la función para procesar los datos
+def procesar_dato(dato):
+    # Procesar el dato aquí (este es solo un ejemplo simple)
+    
     # Checar cada url en Google y registrar los resultados
     query = f'site:{item}'
     try:
@@ -46,15 +17,19 @@ def procesar_dato_en_python(dato):
     resultado = results
     return resultado
 
+# Definir la interfaz de usuario de Streamlit
+def main():
+    st.title('Procesamiento de Datos')
+
+    # Obtener el dato de entrada del usuario
+    dato = st.text_input('Ingrese el dato:')
+
+    # Procesar el dato y mostrar el resultado
+    if st.button('Procesar'):
+        resultado = procesar_dato(dato)
+        st.write('Resultado:', resultado)
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    main()
 
 
-
-
-
-
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
